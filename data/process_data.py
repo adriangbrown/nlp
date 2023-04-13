@@ -50,6 +50,9 @@ def clean_data(df):
         # convert column from string to numeric
         categories[column] = categories[column].fillna(0).astype(int)
     print(categories.head())
+   
+    categories['related'] = categories['related'].replace([2],0)
+    print(categories.related.value_counts())
     
     # drop the original categories column from `df`
     df = df.drop(columns='categories')
@@ -77,7 +80,7 @@ def save_data(df, database_filename):
     '''
 
     engine = create_engine('sqlite:///'+database_filename)
-    df.to_sql('message_categories', engine, index=False)  
+    df.to_sql('message_categories', engine, index=False, if_exists='replace')
 
 
 def main():
