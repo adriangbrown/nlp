@@ -5,8 +5,20 @@ Analysis: Data ingested into this app allow the user to take a message and route
 Conclusion: By transforming the message categories into binary format and stripping down the un-needed elements, we are able to get fairly strong precision and recall percentages in each category making this app useful for dispatching support during a disaster.
 
 ## File Descriptions
---process_data.py:  ingests csv data, processes, and saves to sql database
---train_classifier.py:  extracts data and predicts what category the message should belong to
+app
+| - template
+| |- master.html # main page of web app
+| |- go.html # classification result page of web app
+|- run.py # Flask file that runs app
+data
+|- disaster_categories.csv # data to process
+|- disaster_messages.csv # data to process
+|- process_data.py ingests csv data, processes, and saves to sql database
+|- InsertDatabaseName.db # database to save clean data to
+models
+|- train_classifier.py extracts data and predicts what category the message should belong to
+|- classifier.pkl # saved model
+README.md
 
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
