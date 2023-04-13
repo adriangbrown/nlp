@@ -23,9 +23,15 @@ from sklearn.neighbors import KNeighborsClassifier
 
 def load_data(database_filepath):
     '''Read in data from sql database
-    Keyword arguments
+    Inputs: 
     database_filepath:  database location
+
+    Returns:
+    X: Input variables
+    y: output variables
+    category_names:  list of category names of output variables
     '''
+
     # load data from database
     engine = create_engine('sqlite:///'+database_filepath)
     query = 'SELECT * from message_categories'
@@ -44,6 +50,16 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    '''Ingest text and create a list of words that have been lemmatized, stripped of whitespace
+    and lowered in case
+   
+    Input:
+    text:  user inputted text
+    
+    Returns:
+    clean_tokens:  list of cleaned up words
+    '''
+
     text = re.sub(r"[^a-zA-Z0-9]", " ", text.lower())
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
@@ -55,6 +71,12 @@ def tokenize(text):
     return clean_tokens
 
 def build_model():
+    '''Build ML model with various parameters
+
+    Returns:
+    model:  model with a Pipeline component
+    '''
+
     clf = RandomForestClassifier()
     model = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
@@ -72,6 +94,15 @@ def build_model():
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    '''Evaluates output model effectiveness with a classification report
+  
+    Input:
+    model:  model to use for prediction
+    X_test:  Input test data
+    Y_test:  Output test data
+    category_names:  List of output data category names
+    '''
+
     Y_pred = model.predict(X_test)
     Y_test = np.array(Y_test)
     
@@ -81,6 +112,12 @@ def evaluate_model(model, X_test, Y_test, category_names):
 
 
 def save_model(model, model_filepath):
+    '''Save model to pickle file
+    Input
+    model:  target model
+    model_filepath:  directory to park model pickle file
+    '''
+
     pickle.dump(model, open(model_filepath, 'wb'))
 
 

@@ -9,13 +9,23 @@ from nltk.tokenize import word_tokenize
 from flask import Flask
 from flask import render_template, request, jsonify
 from plotly.graph_objs import *
-#from sklearn.externals import joblib
 from sqlalchemy import create_engine, text
 
 
 app = Flask(__name__)
 
 def tokenize(text):
+    '''Ingest text and create a list of words that have been lemmatized, stripped of whitespace
+    and lowered in case
+   
+    Input:
+    text:  text inputted by user of app
+
+    Returns:
+    clean_tokens:  list of cleaned up words
+
+    '''
+
     tokens = word_tokenize(text)
     lemmatizer = WordNetLemmatizer()
 
@@ -30,7 +40,6 @@ def tokenize(text):
 engine = create_engine('sqlite:///../data/DisasterResponse.db')
 query = 'SELECT * from message_categories'        
 df = pd.read_sql_query(sql=text(query), con=engine.connect()) 
-#df = pd.read_sql_table('message_categories', engine)
 
 # load model
 model = joblib.load("../models/classifier.pkl")
