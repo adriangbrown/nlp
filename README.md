@@ -6,18 +6,18 @@ Conclusion: By transforming the message categories into binary format and stripp
 
 ## File Descriptions
 app
-| - template
-| |- master.html # main page of web app
-| |- go.html # classification result page of web app
-|- run.py # Flask file that runs app
+  template
+    master.html # main page of web app
+    go.html # classification result page of web app
+  run.py # Flask file that runs app
 data
-|- disaster_categories.csv # data to process
-|- disaster_messages.csv # data to process
-|- process_data.py ingests csv data, processes, and saves to sql database
-|- InsertDatabaseName.db # database to save clean data to
+  disaster_categories.csv # data to process
+  disaster_messages.csv # data to process
+  process_data.py ingests csv data, processes, and saves to sql database
+  message_categories.db # database to save clean data to
 models
-|- train_classifier.py extracts data and predicts what category the message should belong to
-|- classifier.pkl # saved model
+  train_classifier.py extracts data and predicts what category the message should belong to
+  classifier.pkl # saved model
 README.md
 
 ### Instructions:
