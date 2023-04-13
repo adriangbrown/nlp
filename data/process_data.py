@@ -6,10 +6,15 @@ from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
     ''' Load two two csv data sets and merge
-    Keyword arguments
+
+    Input: 
     messages_filepath:  path to messages csv
     categories_filepath:  path to categories csv
+
+    Returns:
+    df:  merged dataframe with message and categorizations
     '''
+
     # load messages dataset
     messages = pd.read_csv(messages_filepath)
     print(messages.head())
@@ -23,9 +28,14 @@ def load_data(messages_filepath, categories_filepath):
 
 def clean_data(df):
     '''Creates binary category columns in dataset
-    Keyword arguments
+  
+    Input: 
     df:  target dataframe to clean
+
+    Returns:
+    df:  dataframe cleaned with binary category classification   
     '''
+
     # create a dataframe of the 36 individual category columns
     categories = df.categories.str.split(pat=';', expand=True)
     print(categories.head())
@@ -60,10 +70,12 @@ def clean_data(df):
 
 def save_data(df, database_filename):
     '''Store dataframe in SQL database table
-    Keyword arguments
+   
+    Input 
     df:  source dataframe
     database_filename:  target database
     '''
+
     engine = create_engine('sqlite:///'+database_filename)
     df.to_sql('message_categories', engine, index=False)  
 
