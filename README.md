@@ -14,9 +14,9 @@ Conclusion: By transforming the message categories into binary format and stripp
   * disaster_categories.csv # data to process
   * disaster_messages.csv # data to process
   * process_data.py ingests csv data, processes, and saves to sql database
-  *: message_categories.db # database to save clean data to
+  * message_categories.db # database to save clean data to
 * models
-  *: train_classifier.py extracts data and predicts what category the message should belong to
+  * train_classifier.py extracts data and predicts what category the message should belong to
   * classifier.pkl # saved model
 * README.md
 
